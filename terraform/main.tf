@@ -48,10 +48,6 @@ resource "google_compute_firewall" "ingress_firewall" {
   allow {
     protocol = "icmp"
   }
-
-  source_tags = [
-    "${var.env}-gce-instance"
-  ]
 }
 
 resource "google_compute_instance" "webapi_instance" {
@@ -66,7 +62,7 @@ resource "google_compute_instance" "webapi_instance" {
 
   boot_disk {
     initialize_params {
-      image = "${var.project-id}/webapi-image"
+      image = "${var.project-id}/${terraform.env}-${var.image_name}-${var.image_version}"
     }
   }
 

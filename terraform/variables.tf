@@ -18,3 +18,13 @@ variable "env" {
   type    = string
   default = "dev"
 }
+
+variable "image_name" {
+  type    = string
+  default = "webapi"
+}
+
+variable "image_version" {
+  type    = string
+  default = "0.1"
+}
