@@ -47,14 +47,14 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: $REPOSITORY/packer/webapi.json
+          target: packer/webapi.json
 
       - name: Build Artifact
         uses: operatehappy/packer-github-actions@master
         with:
           command: build
           arguments: "-force -color=false -on-error=abort"
-          target: $REPOSITORY/packer/webapi.json
+          target: packer/webapi.json
 
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
