@@ -5,12 +5,13 @@
     "project_id": "{{env `PROJECT_ID`}}",
     "zone": "{{env `ZONE`}}",
     "env": "{{env `ENV`}}",
-    "version": "{{env `VERSION`}}"
+    "version": "{{env `VERSION`}}",
+    "credentials": "{{env `GCP_CREDENTIALS`}}"
   },
   "builders": [
     {
       "type": "googlecompute",
-      "account_file": "{{env `GCP_CREDENTIALS`}}",
+      "account_file": "{{user `credentials`}}",
       "project_id": "{{user `project_id`}}",
       "source_image_family": "ubuntu-1804-lts",
       "zone": "{{user `zone`}}",
