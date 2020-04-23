@@ -32,6 +32,7 @@ env:
   AUDIENCE: ${{ secrets.AUDIENCE }}
   MONGODB_URI: ${{ secrets.MONGODB_URI }}
   GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+  CURRENT_DIR: $GITHUB_WORKSPACE/webpi-infrastructure
 
 jobs:
   packer-terraform:
