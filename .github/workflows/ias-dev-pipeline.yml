@@ -33,6 +33,7 @@ env:
   MONGODB_URI: ${{ secrets.MONGODB_URI }}
   GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
   CURRENT_DIR: /home/runner/work/webpi-infrastructure/webpi-infrastructure
+  TF_WORKING_DIR: "./terraform"
 
 jobs:
   packer-terraform:
@@ -62,7 +63,7 @@ jobs:
         with:
           tf_actions_version: $TF_VERSION
           tf_actions_subcommand: "init"
-          tf_actions_working_dir: $CURRENT_DIR/terraform
+          tf_actions_working_dir: $TF_WORKING_DIR
           tf_actions_comment: true
           args: '-var="credentials=$GCP_CREDENTIALS"'
         env:
@@ -73,7 +74,7 @@ jobs:
         with:
           tf_actions_version: $TF_VERSION
           tf_actions_subcommand: "plan"
-          tf_actions_working_dir: $CURRENT_DIR/terraform
+          tf_actions_working_dir: $TF_WORKING_DIR
           tf_actions_comment: true
           args: '-var="image_name=webapi" -var="image_version=$VERSION"'
 
@@ -82,5 +83,5 @@ jobs:
         with:
           tf_actions_version: $TF_VERSION
           tf_actions_subcommand: "apply"
-          tf_actions_working_dir: $CURRENT_DIR/terraform
+          tf_actions_working_dir: $TF_WORKING_DIR
           tf_actions_comment: true
