@@ -64,6 +64,7 @@ jobs:
           tf_actions_subcommand: "init"
           tf_actions_working_dir: $CURRENT_DIR/terraform
           tf_actions_comment: true
+          args: '-var="credentials=$GCP_CREDENTIALS"'
         env:
           TF_WORKSPACE: $ENV
 

@@ -1,11 +1,5 @@
 provider "google" {
-  credentials = file("../carrinhodigital.json")
-  project     = var.project-id
-  region      = var.region
-}
-
-provider "google-beta" {
-  credentials = file("../carrinhodigital.json")
+  credentials = var.credentials
   project     = var.project-id
   region      = var.region
 }

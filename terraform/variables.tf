@@ -1,3 +1,7 @@
+variable "credentials" {
+  type = string
+}
+
 variable "project-id" {
   type = string
 }
