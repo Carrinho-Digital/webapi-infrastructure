@@ -1,7 +1,7 @@
 {
   "description": "Create a image",
   "variables": {
-    "home": "{{env `HOME`}}",
+    "home": "{{env `REPOSITORY`}}",
     "project_id": "{{env `PROJECT_ID`}}",
     "zone": "{{env `ZONE`}}",
     "env": "{{env `ENV`}}"
