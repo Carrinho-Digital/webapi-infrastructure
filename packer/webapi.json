@@ -39,7 +39,7 @@
       "type": "ansible-local",
       "playbook_file": "{{user `home`}}/ansible/setup.yml",
       "only": [
-        "{{user `env`}}-webapi"
+        "{{user `env`}}-webapi-{{env `VERSION`}}"
       ]
     }
   ]
