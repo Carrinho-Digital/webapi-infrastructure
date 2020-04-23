@@ -1,0 +1,84 @@
+# Copyright 2020 Google, LLC.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Deploy Carrinho Digital INFRA
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  ENV: dev
+  VERSION: 0.1
+  ZONE: us-central1-a
+  TF_VERSION: "latest"
+  SALT: ${{ secrets.SALT }}
+  PROJECT_ID: carrinhodigital
+  SECRET: ${{ secrets.SECRET }}
+  ISSUER: ${{ secrets.ISSUER }}
+  HOME: ${{ github.repository }}
+  AUDIENCE: ${{ secrets.AUDIENCE }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+
+jobs:
+  packer-terraform:
+    runs-on: ubuntu-latest
+    name: packer
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Validate Template
+        uses: operatehappy/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: $HOME/packer/webapi.json
+
+      - name: Build Artifact
+        uses: operatehappy/packer-github-action
+        with:
+          command: build
+          arguments: "-force -color=false -on-error=abort"
+          target: $HOME/packer/webapi.json
+
+      - name: Terraform Init
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: $TF_VERSION
+          tf_actions_subcommand: "init"
+          tf_actions_working_dir: $HOME/terraform
+          tf_actions_comment: true
+        env:
+          TF_WORKSPACE: $ENV
+
+      - name: Terraform Plan
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: $TF_VERSION
+          tf_actions_subcommand: "plan"
+          tf_actions_working_dir: $HOME/terraform
+          tf_actions_comment: true
+          args: '-var="image_name=webapi" -var="image_version=$VERSION"'
+
+      - name: Terraform Apply
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: $TF_VERSION
+          tf_actions_subcommand: "apply"
+          tf_actions_working_dir: $HOME/terraform
+          tf_actions_comment: true

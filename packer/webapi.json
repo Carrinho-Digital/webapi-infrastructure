@@ -1,20 +1,21 @@
 {
   "description": "Create a image",
   "variables": {
-    "home": "{{env `HOME`}}/Documents/carrinho_digital/webapi-infrastructure",
-    "project_id": "carrinhodigital",
-    "zone": "us-central1-a"
+    "home": "{{env `HOME`}}",
+    "project_id": "{{env `PROJECT_ID`}}",
+    "zone": "{{env `ZONE`}}",
+    "env": "{{env `ENV`}}"
   },
   "builders": [
     {
       "type": "googlecompute",
-      "account_file": "{{user `home`}}/carrinhodigital.json",
+      "account_file": "{{env `GCP_CREDENTIALS`}}",
       "project_id": "{{user `project_id`}}",
       "source_image_family": "ubuntu-1804-lts",
       "zone": "{{user `zone`}}",
       "ssh_username": "ubuntu",
-      "name": "webapi",
-      "image_name": "webapi-image"
+      "name": "{{user `env`}}-webapi-{{env `VERSION`}}",
+      "image_name": "{{user `env`}}-webapi-{{env `VERSION`}}"
     }
   ],
   "provisioners": [
@@ -24,14 +25,21 @@
         "sudo apt update",
         "sudo apt install python-pip -y",
         "sudo pip install ansible",
-        "export ANSIBLE_HOST_KEY_CHECKING=False"
+        "export ANSIBLE_HOST_KEY_CHECKING=False",
+        "export PORT=80",
+        "export MONGODB_URI={{ env `MONGODB_URI` }}",
+        "export SALT={{ env `SALT` }}",
+        "export SECRET='{{ env `SECRET` }}'",
+        "export ISSUER={{ env `ISSUER` }}",
+        "export AUDIENCE={{ env `AUDIENCE` }}",
+        "export EXPIRE_IN_MINUTES=240"
       ]
     },
     {
       "type": "ansible-local",
       "playbook_file": "{{user `home`}}/ansible/setup.yml",
       "only": [
-        "webapi"
+        "{{user `env`}}-webapi"
       ]
     }
   ]
