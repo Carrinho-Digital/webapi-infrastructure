@@ -50,7 +50,7 @@ jobs:
           target: $HOME/packer/webapi.json
 
       - name: Build Artifact
-        uses: operatehappy/packer-github-action
+        uses: operatehappy/packer-github-action@master
         with:
           command: build
           arguments: "-force -color=false -on-error=abort"
