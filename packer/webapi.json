@@ -1,0 +1,38 @@
+{
+  "description": "Create a image",
+  "variables": {
+    "home": "{{env `HOME`}}/Documents/carrinho_digital/webapi-infrastructure",
+    "project_id": "carrinhodigital",
+    "zone": "us-central1-a"
+  },
+  "builders": [
+    {
+      "type": "googlecompute",
+      "account_file": "{{user `home`}}/carrinhodigital.json",
+      "project_id": "{{user `project_id`}}",
+      "source_image_family": "ubuntu-1804-lts",
+      "zone": "{{user `zone`}}",
+      "ssh_username": "ubuntu",
+      "name": "webapi",
+      "image_name": "webapi-image"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt update",
+        "sudo apt install python-pip -y",
+        "sudo pip install ansible",
+        "export ANSIBLE_HOST_KEY_CHECKING=False"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "{{user `home`}}/ansible/setup.yml",
+      "only": [
+        "webapi"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+1. Criar uma VPC para dev
+2. Criar uma subnet dentro da VPC para as regioes us-east e us-central
+3. Criar uma instância com a imagem do packer
+4. Dar a instância um IP da subnet e IP fixo
+5. Testar  
