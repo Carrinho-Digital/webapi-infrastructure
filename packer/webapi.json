@@ -6,7 +6,12 @@
     "zone": "{{env `ZONE`}}",
     "env": "{{env `ENV`}}",
     "version": "{{env `VERSION`}}",
-    "credentials": "{{env `GCP_CREDENTIALS`}}"
+    "credentials": "{{env `GCP_CREDENTIALS`}}",
+    "MONGODB_URI": "{{ env `MONGODB_URI` }}",
+    "SALT": "{{ env `SALT` }}",
+    "SECRET": "{{ env `SECRET` }}",
+    "ISSUER": "{{ env `ISSUER` }}",
+    "AUDIENCE": "{{ env `AUDIENCE` }}"
   },
   "builders": [
     {
@@ -29,11 +34,11 @@
         "sudo pip install ansible",
         "export ANSIBLE_HOST_KEY_CHECKING=False",
         "export PORT=80",
-        "export MONGODB_URI={{ env `MONGODB_URI` }}",
-        "export SALT={{ env `SALT` }}",
-        "export SECRET='{{ env `SECRET` }}'",
-        "export ISSUER={{ env `ISSUER` }}",
-        "export AUDIENCE={{ env `AUDIENCE` }}",
+        "export MONGODB_URI={{ user `MONGODB_URI` }}",
+        "export SALT={{ user `SALT` }}",
+        "export SECRET='{{ user `SECRET` }}'",
+        "export ISSUER={{ user `ISSUER` }}",
+        "export AUDIENCE={{ user `AUDIENCE` }}",
         "export EXPIRE_IN_MINUTES=240"
       ]
     },
