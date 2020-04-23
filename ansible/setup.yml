@@ -48,7 +48,5 @@
       file:
         path: /usr/webapi
         state: directory
-        owner: node
-        group: node
         mode: 0775
         recurse: yes
