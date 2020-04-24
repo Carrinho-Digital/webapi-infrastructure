@@ -49,8 +49,8 @@ jobs:
         with:
           version: "286.0.0"
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
-          service_account_key: $GCP_CREDENTIALS
-          project_id: $PROJECT_ID
+          service_account_key: ${{ env.GCP_CREDENTIALS }}
+          project_id: ${{ env.PROJECT_ID }}
 
       - name: "Retriving GCE Images"
         id: image_exists
@@ -84,7 +84,7 @@ jobs:
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
         env:
-          TF_WORKSPACE: $ENV
+          TF_WORKSPACE: ${{ env.ENV }}
 
       - name: Terraform Plan
         uses: hashicorp/terraform-github-actions@master
