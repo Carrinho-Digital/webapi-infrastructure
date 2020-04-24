@@ -89,6 +89,10 @@ jobs:
           arguments: "-force"
           target: packer/webapi.json
 
+      - name: Proof
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS
+
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
         with:
