@@ -34,7 +34,7 @@ env:
   GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
   CURRENT_DIR: /home/runner/work/webpi-infrastructure/webpi-infrastructure
   TF_WORKING_DIR: "./terraform"
-  GOOGLE_APPLICATION_CREDENTIALS: /home/runner/work/webpi-infrastructure/webpi-infrastructure/credential.json
+  GOOGLE_APPLICATION_CREDENTIALS: /home/runner/work/webpi-infrastructure/webpi-infrastructure
 
 jobs:
   packer-terraform:
@@ -62,11 +62,9 @@ jobs:
 
       - name: "Creating GOOGLE_APPLICATION_CREDENTIALS"
         run: |
-          cat > ${{ env.GOOGLE_APPLICATION_CREDENTIALS }} <<EOF
+          cat > ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json <<EOF
             ${{ env.GCP_CREDENTIALS }}
           EOF
-
-          export GOOGLE_CREDENTIALS=${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: "Check image already exists"
         id: image_exists
@@ -103,7 +101,7 @@ jobs:
           TF_WORKSPACE: ${{ env.ENV }}
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+          TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
 
       - name: Terraform Plan
         uses: hashicorp/terraform-github-actions@master
@@ -115,7 +113,7 @@ jobs:
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+          TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
           TF_WORKSPACE: ${{ env.ENV }}
 
       - name: Terraform Apply
@@ -128,5 +126,5 @@ jobs:
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+          TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
           TF_WORKSPACE: ${{ env.ENV }}
