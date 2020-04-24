@@ -1,11 +1,14 @@
-terraform {
-  backend "gcs" {}
-}
-
 provider "google" {
   credentials = file("${var.credential}")
   project     = var.project-id
   region      = var.region
+}
+
+terraform {
+  backend "gcs" {
+    bucket = "remote-terraform"
+    prefix = "tf/state"
+  }
 }
 
 resource "google_compute_network" "vpc_network" {
