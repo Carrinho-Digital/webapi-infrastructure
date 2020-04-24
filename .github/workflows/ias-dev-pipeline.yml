@@ -53,17 +53,20 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
 
       - name: "Retriving GCE Images"
-        id: image_exists
+        id: images
         run: |
           gcloud config set project $PROJECT_ID
           echo "##[set-output name=image;]$(gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'" | sed -n 2p)"
 
-      - name: "Image"
+      - name: "Check image already exists"
+        id: image_exists
         run: |
-          echo ${{steps.image_exists.outputs.image}}
-          [ -z "${{steps.image_exists.outputs.image}}" ] && echo "Empty" || echo "Not empty"
+          echo ${{steps.images.outputs.image}}
+          [ -z "${{steps.images.outputs.image}}" ] && echo "Empty" || echo "Not empty"
+          echo "##[set-output name=is_empty;]$([ -z "${{steps.images.outputs.image}}" ] && echo "is_empty" || echo "not_empty")"
 
       - name: Validate Template
+        if: ${{steps.image_exists.outputs.is_empty}} == 'is_empty'
         uses: operatehappy/packer-github-actions@master
         with:
           command: validate
@@ -71,6 +74,7 @@ jobs:
           target: packer/webapi.json
 
       - name: Build Artifact
+        if: ${{steps.image_exists.outputs.is_empty}} == 'is_empty'
         uses: operatehappy/packer-github-actions@master
         with:
           command: build
