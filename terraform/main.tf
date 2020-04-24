@@ -10,7 +10,7 @@ terraform {
     hostname     = "app.terraform.io"
 
     workspaces {
-      name = "webpi-infrastructure"
+      prefix = "webpi-infrastructure"
     }
   }
 }
