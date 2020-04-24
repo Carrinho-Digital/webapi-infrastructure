@@ -9,7 +9,7 @@ terraform {
     organization = "eclesiomelo"
 
     workspaces {
-      prefix = "webapi"
+      name = " webpi-infrastructure"
     }
   }
 }
