@@ -7,7 +7,9 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket = "remote-terraform"
-    name   = "tfstate"
+    workspaces {
+      name = "webapi"
+    }
   }
 }
 
