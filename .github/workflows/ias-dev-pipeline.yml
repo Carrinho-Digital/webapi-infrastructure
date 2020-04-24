@@ -56,7 +56,7 @@ jobs:
         id: image_exists
         run: |
           gcloud config set project $PROJECT_ID
-          echo "##[set-output name=image;]$(gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'")"
+          echo "##[set-output name=image;]$(gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'" | sed -n 2p)"
 
       - name: "Image"
         run: |
