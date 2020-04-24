@@ -56,12 +56,11 @@ jobs:
         id: image_exists
         run: |
           gcloud config set project $PROJECT_ID
-          gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'"
+          echo "##[set-output name=image;]$(gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'")"
 
       - name: "Image"
         run: |
-          echo ${{steps.image_exists.outputs.NAME}}
-          echo ${{steps.image_exists.outputs.READY}}
+          echo ${{steps.image_exists.outputs.image}}
 
       - name: Validate Template
         uses: operatehappy/packer-github-actions@master
