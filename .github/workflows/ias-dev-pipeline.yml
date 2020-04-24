@@ -98,7 +98,6 @@ jobs:
           tf_actions_subcommand: "plan"
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
-          args: '-var="image_name=webapi" -var="image_version=${{ env.VERSION }}" -var="credentials=${{ env.GCP_CREDENTIALS }}"'
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION}}
