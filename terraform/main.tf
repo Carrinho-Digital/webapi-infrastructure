@@ -56,7 +56,7 @@ resource "google_compute_instance" "webapi_instance" {
 
   boot_disk {
     initialize_params {
-      image = "${var.project-id}/${terraform.env}-${var.image_name}-${var.image_version}"
+      image = "${var.project-id}/${terraform.workspace}-${var.image_name}-${var.image_version}"
     }
   }
 

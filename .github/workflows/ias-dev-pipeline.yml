@@ -44,6 +44,24 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: "Setup GCP"
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: "286.0.0"
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: $GCP_CREDENTIALS
+          project_id: $PROJECT_ID
+
+      - name: "Retriving GCE Images"
+        id: image_exists
+        run: |
+          gcloud config set project $PROJECT_ID
+          gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'"
+
+      - name: "Image"
+        run: |
+          echo ${{steps.image_exists.outputs}}
+
       - name: Validate Template
         uses: operatehappy/packer-github-actions@master
         with:
