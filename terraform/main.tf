@@ -8,7 +8,7 @@ terraform {
   backend "remote" {
     organization = "eclesiomelo"
 
-    workspaces = {
+    workspaces {
       name = "webapi"
     }
   }
