@@ -1,8 +1,5 @@
 terraform {
-  backend "gcs" {
-    bucket = "remote-state"
-    prefix = "terraform/state"
-  }
+  backend "gcs" {}
 }
 
 provider "google" {
