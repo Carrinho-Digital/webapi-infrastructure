@@ -91,6 +91,14 @@ jobs:
           arguments: "-force"
           target: packer/webapi.json
 
+      - name: Generating Terraform Credentials
+        run: |
+          cat > ~/.terraformrc <<EOF
+            credentials "app.terraform.io" {
+              token = ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
+            }
+          EOF
+
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
         with:

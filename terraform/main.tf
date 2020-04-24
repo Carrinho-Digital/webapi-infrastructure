@@ -5,9 +5,10 @@ provider "google" {
 }
 
 terraform {
-  backend "gcs" {
-    bucket = "remote-terraform"
-    workspaces {
+  backend "remote" {
+    organization = "eclesiomelo"
+
+    workspaces = {
       name = "webapi"
     }
   }
