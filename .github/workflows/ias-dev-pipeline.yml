@@ -52,6 +52,7 @@ jobs:
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           service_account_key: ${{ env.GCP_CREDENTIALS }}
           project_id: ${{ env.PROJECT_ID }}
+          export_default_credentials: true
 
       - name: "Retriving GCE Images"
         id: images
