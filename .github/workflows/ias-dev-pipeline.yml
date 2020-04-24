@@ -114,10 +114,10 @@ jobs:
           tf_actions_subcommand: "plan"
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
+          args: '-var="credential=$GOOGLE_APPLICATION_CREDENTIALS"'
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: $GOOGLE_APPLICATION_CREDENTIALS
           TF_WORKSPACE: ${{ env.ENV }}
 
       - name: Terraform Apply
@@ -127,8 +127,8 @@ jobs:
           tf_actions_subcommand: "apply"
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
+          args: '-var="credential=$GOOGLE_APPLICATION_CREDENTIALS"'
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: $GOOGLE_APPLICATION_CREDENTIALS
           TF_WORKSPACE: ${{ env.ENV }}
