@@ -1,7 +1,8 @@
 terraform {
   backend "gcs" {
-    bucket = "remote-state"
-    prefix = "terraform/state"
+    bucket      = "remote-state"
+    prefix      = "terraform/state"
+    credentials = file("${var.credential}")
   }
 }
 
