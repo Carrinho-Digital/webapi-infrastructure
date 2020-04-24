@@ -8,6 +8,10 @@ terraform {
   backend "remote" {
     organization = "eclesiomelo"
     hostname     = "app.terraform.io"
+
+    workspaces {
+      name = "webpi-infrastructure"
+    }
   }
 }
 
