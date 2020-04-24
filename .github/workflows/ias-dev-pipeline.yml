@@ -63,10 +63,10 @@ jobs:
         run: |
           echo ${{steps.images.outputs.image}}
           [ -z "${{steps.images.outputs.image}}" ] && echo "Empty" || echo "Not empty"
-          echo "##[set-output name=is_empty;]$([ -z "${{steps.images.outputs.image}}" ] && echo "is_empty" || echo "not_empty")"
+          echo "##[set-output name=is_empty;]$([ -z "${{steps.images.outputs.image}}" ])"
 
       - name: Validate Template
-        if: ${{steps.image_exists.outputs.is_empty}} == 'is_empty'
+        if: steps.image_exists.outputs.is_empty
         uses: operatehappy/packer-github-actions@master
         with:
           command: validate
@@ -74,7 +74,7 @@ jobs:
           target: packer/webapi.json
 
       - name: Build Artifact
-        if: ${{steps.image_exists.outputs.is_empty}} == 'is_empty'
+        if: steps.image_exists.outputs.is_empty
         uses: operatehappy/packer-github-actions@master
         with:
           command: build
