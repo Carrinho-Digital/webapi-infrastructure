@@ -60,11 +60,11 @@ jobs:
           gcloud config set project $PROJECT_ID
           echo "##[set-output name=image;]$(gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'" | sed -n 2p)"
 
-      - name: "Creating GOOGLE_APPLICATION_CREDENTIALS"
-        run: |
-          cat > ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json <<EOF
-            ${{ env.GCP_CREDENTIALS }}
-          EOF
+      # - name: "Creating GOOGLE_APPLICATION_CREDENTIALS"
+      #   run: |
+      #     cat > ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json <<EOF
+      #       ${{ env.GCP_CREDENTIALS }}
+      #     EOF
 
       - name: "Check image already exists"
         id: image_exists
@@ -101,7 +101,7 @@ jobs:
           TF_WORKSPACE: ${{ env.ENV }}
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
+          #TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
 
       - name: Terraform Plan
         uses: hashicorp/terraform-github-actions@master
@@ -113,7 +113,7 @@ jobs:
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
+          #TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
           TF_WORKSPACE: ${{ env.ENV }}
 
       - name: Terraform Apply
@@ -126,5 +126,5 @@ jobs:
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
-          TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
+          #TF_VAR_credential: "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}/credential.json"
           TF_WORKSPACE: ${{ env.ENV }}

@@ -2,10 +2,6 @@ variable "project-id" {
   type = string
 }
 
-variable "credential" {
-  type = string
-}
-
 variable "region" {
   type = string
 }
