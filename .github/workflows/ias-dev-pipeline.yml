@@ -91,14 +91,6 @@ jobs:
           arguments: "-force"
           target: packer/webapi.json
 
-      - name: Generating Terraform Credentials
-        run: |
-          cat > ~/.terraformrc <<EOF
-            credentials "app.terraform.io" {
-              token = ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
-            }
-          EOF
-
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -106,7 +98,7 @@ jobs:
           tf_actions_subcommand: "init"
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
-          args: "-force-copy -input=false"
+          args: '-force-copy -input=false -backend-config="token=${{ secrets.TERRAFORM_CLOUD_TOKEN }}"'
         env:
           TF_WORKSPACE: ${{ env.ENV }}
 
