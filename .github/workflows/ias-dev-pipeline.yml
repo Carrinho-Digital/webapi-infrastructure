@@ -95,9 +95,10 @@ jobs:
           tf_actions_subcommand: "init"
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
-          args: '-backend-config=bucket="remote-state" -backend-config=prefix="tf/state" -backend-config=credentials="${{ env.GOOGLE_APPLICATION_CREDENTIALS }}"'
+          args: '-backend-config=bucket="remote-state" -backend-config=prefix="tf/state"'
         env:
           TF_WORKSPACE: ${{ env.ENV }}
+          GOOGLE_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Terraform Plan
         uses: hashicorp/terraform-github-actions@master
@@ -106,12 +107,12 @@ jobs:
           tf_actions_subcommand: "plan"
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
-
         env:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
           TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
           TF_WORKSPACE: ${{ env.ENV }}
+          GOOGLE_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Terraform Apply
         uses: hashicorp/terraform-github-actions@master
@@ -125,3 +126,4 @@ jobs:
           TF_VAR_image_version: ${{ env.VERSION }}
           TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
           TF_WORKSPACE: ${{ env.ENV }}
+          GOOGLE_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
