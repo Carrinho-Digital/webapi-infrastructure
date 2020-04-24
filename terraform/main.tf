@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "${terraform.workspace}-remote-state"
+    bucket = "remote-state"
     prefix = "terraform/state"
   }
 }
