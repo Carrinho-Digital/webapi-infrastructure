@@ -109,6 +109,7 @@ jobs:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
           TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+          TF_WORKSPACE: ${{ env.ENV }}
 
       - name: Terraform Apply
         uses: hashicorp/terraform-github-actions@master
@@ -121,3 +122,4 @@ jobs:
           TF_VAR_image_name: "webapi"
           TF_VAR_image_version: ${{ env.VERSION }}
           TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+          TF_WORKSPACE: ${{ env.ENV }}
