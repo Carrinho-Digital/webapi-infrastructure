@@ -56,7 +56,6 @@ jobs:
         id: images
         run: |
           gcloud config set project $PROJECT_ID
-          gcloud auth application-default login
           echo "##[set-output name=image;]$(gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'" | sed -n 2p)"
 
       - name: "Check image already exists"
