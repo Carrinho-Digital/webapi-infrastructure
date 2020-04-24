@@ -1,3 +1,10 @@
+terraform {
+  backend "gcs" {
+    bucket = "${terraform.workspace}-remote-state"
+    prefix = "terraform/state"
+  }
+}
+
 provider "google" {
   credentials = file("${var.credential}")
   project     = var.project-id
