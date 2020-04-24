@@ -98,7 +98,7 @@ jobs:
           tf_actions_subcommand: "init"
           tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
           tf_actions_comment: true
-          args: "-force-copy"
+          args: "-force-copy -input=false"
         env:
           TF_WORKSPACE: ${{ env.ENV }}
 
