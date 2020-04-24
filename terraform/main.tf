@@ -1,7 +1,6 @@
 provider "google" {
-  credentials = var.credentials
-  project     = var.project-id
-  region      = var.region
+  project = var.project-id
+  region  = var.region
 }
 
 resource "google_compute_network" "vpc_network" {
