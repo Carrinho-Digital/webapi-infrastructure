@@ -65,6 +65,8 @@ jobs:
             ${{ env.GCP_CREDENTIALS }}
           EOF
 
+          export GOOGLE_CREDENTIALS=${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+
       - name: "Check image already exists"
         id: image_exists
         run: |
