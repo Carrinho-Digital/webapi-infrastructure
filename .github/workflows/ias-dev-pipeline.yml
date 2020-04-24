@@ -101,6 +101,9 @@ jobs:
           args: '-force-copy -input=false -backend-config="token=${{ secrets.TERRAFORM_CLOUD_TOKEN }}"'
         env:
           TF_WORKSPACE: ${{ env.ENV }}
+          TF_VAR_image_name: "webapi"
+          TF_VAR_image_version: ${{ env.VERSION }}
+          TF_VAR_credential: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Terraform Plan
         uses: hashicorp/terraform-github-actions@master
