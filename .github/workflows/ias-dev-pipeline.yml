@@ -60,9 +60,7 @@ jobs:
           echo "##[set-output name=image;]$(gcloud compute images list --filter="name~'$ENV-webapi-$VERSION'" | sed -n 2p)"
 
       - name: "Creating GOOGLE_APPLICATION_CREDENTIALS"
-        id: images
         run: |
-          gcloud config set project $PROJECT_ID
           echo ${{ env.GCP_CREDENTIALS }} >> ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: "Check image already exists"
