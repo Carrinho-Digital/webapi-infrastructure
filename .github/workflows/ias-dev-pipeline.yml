@@ -74,7 +74,7 @@ jobs:
           echo "##[set-output name=is_empty;]$([ -z "${{steps.images.outputs.image}}" ])"
 
       - name: Validate Template
-        if: steps.image_exists.outputs.is_empty == true
+        if: steps.image_exists.outputs.is_empty == "true"
         uses: operatehappy/packer-github-actions@master
         with:
           command: validate
@@ -82,7 +82,7 @@ jobs:
           target: packer/webapi.json
 
       - name: Build Artifact
-        if: steps.image_exists.outputs.is_empty == true
+        if: steps.image_exists.outputs.is_empty == "true"
         uses: operatehappy/packer-github-actions@master
         with:
           command: build
