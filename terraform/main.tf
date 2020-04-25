@@ -16,7 +16,7 @@ terraform {
 }
 
 resource "google_compute_network" "vpc_network" {
-  name                    = "${var.env}-webapi-vpc"
+  name                    = "${terraform.workspace}-webapi-vpc"
   auto_create_subnetworks = false
 }
 
@@ -25,7 +25,7 @@ resource "google_compute_address" "gce_static_ip" {
 }
 
 resource "google_compute_subnetwork" "subnet" {
-  name                     = "${var.env}-webapi-subnet"
+  name                     = "${terraform.workspace}-webapi-subnet"
   region                   = var.region
   private_ip_google_access = true
   ip_cidr_range            = "10.1.0.0/16"
@@ -33,7 +33,7 @@ resource "google_compute_subnetwork" "subnet" {
 }
 
 resource "google_compute_firewall" "ingress_firewall" {
-  name    = "${var.env}-webapi-ingress-firewall"
+  name    = "${terraform.workspace}-webapi-ingress-firewall"
   network = google_compute_network.vpc_network.self_link
 
   source_ranges = ["0.0.0.0/0"]
@@ -46,6 +46,7 @@ resource "google_compute_firewall" "ingress_firewall" {
       443,
       8080,
       8443,
+      3389,
       27017,
     ]
   }
@@ -61,8 +62,8 @@ resource "google_compute_instance" "webapi_instance" {
   machine_type = var.machine_type
 
   tags = [
-    "${var.env}",
-    "${var.env}-gce-instance"
+    "${terraform.workspace}",
+    "${terraform.workspace}-gce-instance"
   ]
 
   boot_disk {
