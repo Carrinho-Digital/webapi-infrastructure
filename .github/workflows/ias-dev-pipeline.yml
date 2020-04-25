@@ -70,8 +70,7 @@ jobs:
         id: image_exists
         run: |
           echo ${{steps.images.outputs.image}}
-          [ -z "${{steps.images.outputs.image}}" ] && echo "Empty" || echo "Not empty"
-          echo "##[set-output name=is_empty;]$([ -z "${{steps.images.outputs.image}}" ])"
+          [ -z "${{steps.images.outputs.image}}" ] && echo "::set-output name=is_empty::true" || echo "::set-output name=is_empty::false"
 
       - name: "Testing Image Exists"
         run: |
