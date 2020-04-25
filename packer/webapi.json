@@ -28,7 +28,7 @@
         "sudo apt install nginx -y",
         "sudo systemctl start nginx",
         "sudo apt install python-pip -y",
-        "sudo pip install ansible -y",
+        "sudo pip install ansible",
         "export ANSIBLE_HOST_KEY_CHECKING=False"
       ]
     },
