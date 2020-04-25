@@ -21,7 +21,7 @@ on:
 
 env:
   ENV: dev
-  VERSION: 1-01
+  VERSION: 2-0
   ZONE: us-central1-a
   TF_VERSION: "latest"
   SALT: ${{ secrets.SALT }}
