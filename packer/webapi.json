@@ -25,10 +25,10 @@
       "type": "shell",
       "inline": [
         "sudo apt update",
-        "sudo apt install nginx",
+        "sudo apt install nginx -y",
         "sudo systemctl start nginx",
         "sudo apt install python-pip -y",
-        "sudo pip install ansible",
+        "sudo pip install ansible -y",
         "export ANSIBLE_HOST_KEY_CHECKING=False"
       ]
     },
