@@ -18,11 +18,6 @@ variable "machine_type" {
   type = string
 }
 
-variable "env" {
-  type    = string
-  default = "dev"
-}
-
 variable "image_name" {
   type    = string
   default = "webapi"
