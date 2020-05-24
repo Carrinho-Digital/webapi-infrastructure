@@ -22,7 +22,7 @@ resource "digitalocean_kubernetes_cluster" "kubernetes_prod_cluster" {
     size       = "s-1vcpu-2gb"
     auto_scale = true
     min_nodes  = 2
-    tags       = ["prod", "workers"]
+    tags       = ["prod", "worker"]
     max_nodes  = 3
   }
 }
