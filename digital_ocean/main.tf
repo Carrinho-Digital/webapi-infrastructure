@@ -12,7 +12,7 @@ resource "digitalocean_vpc" "carrinho_sfo3_vpc" {
 
 resource "digitalocean_kubernetes_cluster" "kubernetes_prod_cluster" {
   name     = "kubernetes-prod-cluster"
-  region   = var.region
+  region   = var.digital_ocean_region_sfo3
   version  = "1.17.5-do.0"
   vpc_uuid = digitalocean_vpc.carrinho_sfo3_vpc.id
   tags     = ["prod", "webapi"]
