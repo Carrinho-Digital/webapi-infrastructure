@@ -1,3 +1,5 @@
 carrinhodigital.json
 .terraform
 .vscode
+
+**/terraform.tfvars
