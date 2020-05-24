@@ -14,3 +14,15 @@ variable "digital_ocean_project" {
   type    = string
   default = "carrinhodigital"
 }
+
+variable "digital_ocean_token" {
+  type = string
+}
+
+variable "region" {
+  type = string
+}
+
+variable "ip_range" {
+  type = string
+}
