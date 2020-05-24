@@ -19,7 +19,11 @@ variable "digital_ocean_token" {
   type = string
 }
 
-variable "region" {
+variable "digital_ocean_region_sfo1" {
+  type = string
+}
+
+variable "digital_ocean_region_sfo3" {
   type = string
 }
 
