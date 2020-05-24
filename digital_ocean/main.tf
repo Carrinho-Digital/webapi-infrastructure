@@ -1,5 +1,5 @@
 resource "digitalocean_vpc" "carrinho_sfo1_vpc" {
-  name     = "carrinhodigital-sfo1-vpc"
+  name     = "carrinhodigital-vpc"
   region   = var.digital_ocean_region_sfo1
   ip_range = var.vpc_sfo1_ip_range
 }
