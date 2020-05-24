@@ -23,6 +23,10 @@ variable "region" {
   type = string
 }
 
-variable "ip_range" {
+variable "vpc_sfo1_ip_range" {
+  type = string
+}
+
+variable "vpc_sfo3_ip_range" {
   type = string
 }
