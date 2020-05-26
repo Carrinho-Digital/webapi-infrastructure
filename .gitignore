@@ -3,3 +3,7 @@ carrinhodigital.json
 .vscode
 
 **/terraform.tfvars
+prd-cluster.yaml
+
+tls.*
+auth
