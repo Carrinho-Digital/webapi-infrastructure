@@ -25,7 +25,7 @@ jobs:
       - name: Replace $(K8S_GCP)
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: "'%K8S_GCP%'"
+          find: "%K8S_GCP%"
           replace: ${{ secrets.K8S_GCP }}
 
       - name: Create DigitalOcean kubeconfig
