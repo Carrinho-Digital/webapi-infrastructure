@@ -1,0 +1,37 @@
+name: WebAPI-Infra-CD-k8s
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  DIGITAL_OCEAN_CLUSTER_NAME: kubernetes-prod-cluster
+
+jobs:
+  setup-digital-ocean-cluster:
+    name: "Setup K8S Cluster"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
+
+      - name: Replace $(K8S_GCP)
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "'%K8S_GCP%'"
+          replace: ${{ secrets.K8S_GCP }}
+
+      - name: Create DigitalOcean kubeconfig
+        run: |
+          doctl kubernetes cluster kubeconfig save ${{ env.DIGITAL_OCEAN_CLUSTER_NAME }}
+
+      - name: Deploy k8s files to cluster
+        run: |
+          kubectl apply -f ${{ github.workspace }}/k8s/prd

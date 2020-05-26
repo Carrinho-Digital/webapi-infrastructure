@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: "%K8S_GCP%"
+kind: Secret
+metadata:
+  name: gcr-docker-image-credentials
+type: kubernetes.io/dockerconfigjson
