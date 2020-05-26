@@ -4,10 +4,22 @@ metadata:
   name: traefik-web-service
   namespace: kube-system
 spec:
-  type: ClusterIP
   selector:
     app: traefik-ingress-lb
   ports:
     - protocol: TCP
+      port: 443
+      targetPort: 433
+      name: web-https
+
+    - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 80
+      name: web-http
+
+    - protocol: TCP
+      name: web-hc
+      port: 8000
+      targetPort: 8000
+
+  type: NodePort
