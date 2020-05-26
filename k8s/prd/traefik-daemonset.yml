@@ -59,7 +59,9 @@ spec:
           args:
             - --api
             - --providers.kubernetesingress=true
-            - --logLevel=INFO
+            - --log.level=DEBUG
+            - --log.filePath=/path/to/traefik.log
+            - --log.format=json
             - --ping
             - --ping.entrypoint=hc
             - --entrypoints.http.address=:80
