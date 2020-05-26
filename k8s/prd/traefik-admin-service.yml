@@ -8,12 +8,18 @@ spec:
     app: traefik-ingress-lb
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
-      name: admin
+      port: 443
+      targetPort: 433
+      name: web-https
 
     - protocol: TCP
-      port: 8443
-      targetPort: 8080
-      name: admin-ssl
-  type: ClusterIP
+      port: 80
+      targetPort: 80
+      name: web-http
+
+    - protocol: TCP
+      name: web-hc
+      port: 8000
+      targetPort: 8000
+
+  type: NodePort

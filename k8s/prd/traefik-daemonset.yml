@@ -22,9 +22,18 @@ spec:
         - image: traefik:v1.7
           name: traefik-ingress-lb
           ports:
-            - name: admin
-              hostPort: 8080
-              containerPort: 8080
+            - containerPort: 80
+              hostPort: 80
+              name: http
+
+            - containerPort: 443
+              hostPort: 443
+              name: https
+
+            - containerPort: 8000
+              name: hc
+              protocol: TCP
+
           securityContext:
             capabilities:
               drop:
@@ -38,3 +47,4 @@ spec:
             - --defaultentrypoints=http,https
             - --entrypoints=Name:https Address::443 TLS
             - --entrypoints=Name:http Address::80
+            - --entryPoints=Name:hc Address::8000
