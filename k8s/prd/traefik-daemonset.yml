@@ -69,4 +69,4 @@ spec:
             - --entrypoints.hc.address=:8000
             - --entrypoints.http.http.redirections.entrypoint.to=https
             - --entrypoints.web.http.redirections.entrypoint.scheme=https
-            - --sendanonymoususage=true
+            - --global.sendanonymoususage=true
