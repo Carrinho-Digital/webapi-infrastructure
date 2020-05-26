@@ -62,7 +62,9 @@ spec:
             - --logLevel=INFO
             - --ping
             - --ping.entrypoint=hc
-            - --entrypoints=Name:https Address::443 TLS
-            - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
-            - --entryPoints=Name:hc Address::8000
+            - --entrypoints.http.address=:80
+            - --entrypoints.https.address=:443
+            - --entrypoints.hc.address=:8000
+            - --entrypoints.http.http.redirections.entrypoint.to=https
+            - --entrypoints.web.http.redirections.entrypoint.scheme=https
             - --sendanonymoususage=true
