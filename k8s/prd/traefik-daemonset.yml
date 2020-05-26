@@ -60,9 +60,9 @@ spec:
             - --api
             - --kubernetes
             - --logLevel=INFO
-            - --defaultentrypoints=http,https
+            - --ping
+            - --ping.entrypoint=hc
             - --entrypoints=Name:https Address::443 TLS
             - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
             - --entryPoints=Name:hc Address::8000
-            - --ping
-            - --ping.entrypoint=hc
+            - --sendanonymoususage=true
