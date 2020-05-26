@@ -66,5 +66,3 @@ spec:
             - --entryPoints=Name:hc Address::8000
             - --ping
             - --ping.entrypoint=hc
-            - --defaultentrypoints=https
-            - --sendanonymoususage=true
