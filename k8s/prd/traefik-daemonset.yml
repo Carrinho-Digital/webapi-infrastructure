@@ -58,7 +58,7 @@ spec:
                 - NET_BIND_SERVICE
           args:
             - --api
-            - --kubernetes
+            - --providers.kubernetesingress=true
             - --logLevel=INFO
             - --ping
             - --ping.entrypoint=hc
