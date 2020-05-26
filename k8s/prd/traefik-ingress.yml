@@ -12,7 +12,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: traefik-web-ui-service
+              serviceName: traefik-web-service
               servicePort: admin
   tls:
     - secretName: traefik-ui-tls-cert
