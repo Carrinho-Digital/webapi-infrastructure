@@ -18,16 +18,32 @@ spec:
     spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
+      dnsPolicy: ClusterFirst
       containers:
-        - image: traefik:v1.7
+        - image: traefik
           name: traefik-ingress-lb
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
               hostPort: 80
+              protocol: TCP
               name: http
 
             - containerPort: 443
               hostPort: 443
+              protocol: TCP
               name: https
 
             - containerPort: 8000
@@ -46,5 +62,9 @@ spec:
             - --logLevel=INFO
             - --defaultentrypoints=http,https
             - --entrypoints=Name:https Address::443 TLS
-            - --entrypoints=Name:http Address::80
+            - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
             - --entryPoints=Name:hc Address::8000
+            - --ping
+            - --ping.entrypoint=hc
+            - --defaultentrypoints=https
+            - --sendanonymoususage=true
