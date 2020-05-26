@@ -22,17 +22,9 @@ spec:
         - image: traefik:v1.7
           name: traefik-ingress-lb
           ports:
-            - name: http
-              hostPort: 80
-              containerPort: 80
-
             - name: admin
               hostPort: 8080
               containerPort: 8080
-
-            - name: https
-              containerPort: 443
-              hostPort: 443
           securityContext:
             capabilities:
               drop:
