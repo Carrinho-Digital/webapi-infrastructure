@@ -3,14 +3,14 @@ name: WebAPI-Infra-CD-k8s
 on:
   push:
     branches:
-      - master
+      - production/k8s
 
 env:
   DIGITAL_OCEAN_CLUSTER_NAME: kubernetes-prod-cluster
 
 jobs:
   setup-digital-ocean-cluster:
-    name: "Setup K8S Cluster"
+    name: 'Setup K8S Cluster'
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
       - name: Replace $(K8S_GCP)
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: "%K8S_GCP%"
+          find: '%K8S_GCP%'
           replace: ${{ secrets.K8S_GCP }}
 
       - name: Create DigitalOcean kubeconfig
