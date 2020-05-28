@@ -10,7 +10,7 @@ env:
 
 jobs:
   setup-digital-ocean-cluster:
-    name: 'Setup K8S Cluster'
+    name: "Setup K8S Cluster"
     runs-on: ubuntu-latest
 
     steps:
@@ -25,8 +25,20 @@ jobs:
       - name: Replace $(K8S_GCP)
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: '%K8S_GCP%'
+          find: "%K8S_GCP%"
           replace: ${{ secrets.K8S_GCP }}
+
+      - name: Replace $(TLS_CERT_BASE64)
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "%TLS_CERT_BASE64%"
+          replace: ${{ secrets.TLS_CERT_BASE64 }}
+
+      - name: Replace $(TLS_KEY_BASE64)
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "%TLS_KEY_BASE64%"
+          replace: ${{ secrets.TLS_KEY_BASE64 }}
 
       - name: Create DigitalOcean kubeconfig
         run: |
