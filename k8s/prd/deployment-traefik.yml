@@ -24,8 +24,8 @@ spec:
             - --api.insecure
             - --entrypoints.web.address=:80
             - --entrypoints.websecure.address=:443
-            - --entrypoints.web.redirections.entryPoint.to=websecure
-            - --entrypoints.web.redirections.entryPoint.scheme=https
+            - --entrypoints.web.http.redirections.entryPoint.to=websecure
+            - --entrypoints.web.http.redirections.entryPoint.scheme=https
             - --providers.kubernetesingress
           ports:
             - name: web
