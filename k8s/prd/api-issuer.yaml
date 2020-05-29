@@ -10,7 +10,8 @@ kind: Certificate
 metadata:
   name: api.carrinhodigital.co-cert
 spec:
-  commonName: api.carrinhodigital.co
+  dnsNames:
+    - api.carrinhodigital.co
   secretName: api.carrinhodigital.co-cert
   issuerRef:
     name: issuer-api-carrinhodigital
