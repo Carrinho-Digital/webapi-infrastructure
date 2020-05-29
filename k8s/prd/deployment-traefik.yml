@@ -25,8 +25,6 @@ spec:
             - --entrypoints.web.address=:80
             - --entrypoints.websecure.address=:443
             - --providers.kubernetesingress
-            - --entrypoints.web.http.redirections.entrypoint.to=websecure
-            - --entrypoints.web.http.redirections.entrypoint.scheme=https
           ports:
             - name: web
               containerPort: 80
