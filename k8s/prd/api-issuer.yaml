@@ -4,7 +4,7 @@ metadata:
   name: letsencrypt-api-carrinhodigital
 spec:
   acme:
-    email: carrinhodigitaloficial@gmail.com
+    email: eclesiomelo.1@gmail.com
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: issuer-account-key
@@ -19,6 +19,8 @@ metadata:
   name: api.carrinhodigital.co-cert
 spec:
   commonName: api.carrinhodigital.co
+  dnsNames:
+    - api.carrinhodigital.co
   secretName: api.carrinhodigital.co-cert
   issuerRef:
     name: letsencrypt-api-carrinhodigital
