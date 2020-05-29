@@ -1,17 +1,10 @@
 apiVersion: cert-manager.io/v1alpha2
-kind: ClusterIssuer
+kind: Issuer
 metadata:
-  name: letsencrypt-api-carrinhodigital
+  name: issuer-api-carrinhodigital
 spec:
-  acme:
-    email: eclesiomelo.1@gmail.com
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      name: issuer-account-key
-    solvers:
-      - http01:
-          ingress:
-            class: traefik
+  ca:
+    secretName: secret-tls
 ---
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
@@ -23,4 +16,4 @@ spec:
     - api.carrinhodigital.co
   secretName: api.carrinhodigital.co-cert
   issuerRef:
-    name: letsencrypt-api-carrinhodigital
+    name: issuer-api-carrinhodigital
