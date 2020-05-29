@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: issuer-api-carrinhodigital
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: api.carrinhodigital.co-cert
+spec:
+  commonName: api.carrinhodigital.co
+  secretName: api.carrinhodigital.co-cert
+  issuerRef:
+    name: issuer-api-carrinhodigital
